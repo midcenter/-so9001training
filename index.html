@@ -281,7 +281,16 @@ certificate: `
 <button onclick="generateCertificate()">Sertifikatı yüklə</button>
 </div>
 `
+<div class="card">
+<h2>Sertifikat Generator</h2>
 
+<input id="name" placeholder="Ad">
+<input id="surname" placeholder="Soyad">
+
+<button onclick="generateCertificate()">
+Sertifikat yarat
+</button>
+</div>
 };
 
 document.getElementById("content").innerHTML = sections[section];
