@@ -22,7 +22,7 @@ display:flex;
 height:100vh;
 }
 
-/* SOL MENU */
+/* SIDEBAR */
 .sidebar{
 width:270px;
 background:#0f172a;
@@ -34,7 +34,6 @@ overflow-y:auto;
 .sidebar h2{
 text-align:center;
 margin-bottom:20px;
-font-size:22px;
 }
 
 .sidebar ul{
@@ -42,13 +41,21 @@ list-style:none;
 }
 
 .sidebar li{
-padding:15px;
 border-bottom:1px solid #334155;
-cursor:pointer;
-transition:.3s;
 }
 
-.sidebar li:hover{
+.sidebar button{
+width:100%;
+background:none;
+border:none;
+color:white;
+text-align:left;
+padding:15px 0;
+cursor:pointer;
+font-size:15px;
+}
+
+.sidebar button:hover{
 background:#1e293b;
 }
 
@@ -71,19 +78,20 @@ box-shadow:0 2px 8px rgba(0,0,0,0.08);
 
 .topnav-left{
 display:flex;
-gap:35px;
+gap:25px;
 align-items:center;
 }
 
-.topnav-left a{
-text-decoration:none;
+.topnav-left button{
+background:none;
+border:none;
 font-weight:bold;
-color:#0f172a;
+font-size:15px;
 cursor:pointer;
-transition:.3s;
+color:#0f172a;
 }
 
-.topnav-left a:hover{
+.topnav-left button:hover{
 color:#2563eb;
 }
 
@@ -119,11 +127,7 @@ border-radius:12px;
 box-shadow:0 3px 12px rgba(0,0,0,0.08);
 }
 
-.card h2{
-margin-bottom:15px;
-}
-
-button{
+button.main-btn{
 padding:12px 20px;
 background:#2563eb;
 color:white;
@@ -133,7 +137,7 @@ cursor:pointer;
 margin-top:10px;
 }
 
-button:hover{
+button.main-btn:hover{
 background:#1d4ed8;
 }
 
@@ -167,13 +171,13 @@ border-radius:8px;
 <div class="sidebar">
 <h2>ISO 9001:2015</h2>
 <ul>
-<li onclick="loadClause('4')">4. Kontekst</li>
-<li onclick="loadClause('5')">5. Liderlik</li>
-<li onclick="loadClause('6')">6. Planlaşdırma</li>
-<li onclick="loadClause('7')">7. Dəstək</li>
-<li onclick="loadClause('8')">8. Əməliyyat</li>
-<li onclick="loadClause('9')">9. Qiymətləndirmə</li>
-<li onclick="loadClause('10')">10. Təkmilləşdirmə</li>
+<li><button onclick="loadClause('4')">4. Kontekst</button></li>
+<li><button onclick="loadClause('5')">5. Liderlik</button></li>
+<li><button onclick="loadClause('6')">6. Planlaşdırma</button></li>
+<li><button onclick="loadClause('7')">7. Dəstək</button></li>
+<li><button onclick="loadClause('8')">8. Əməliyyat</button></li>
+<li><button onclick="loadClause('9')">9. Qiymətləndirmə</button></li>
+<li><button onclick="loadClause('10')">10. Təkmilləşdirmə</button></li>
 </ul>
 </div>
 
@@ -183,11 +187,11 @@ border-radius:8px;
 <!-- TOPBAR -->
 <div class="topbar">
 <div class="topnav-left">
-<a onclick="showSection('about')">Təlim haqqında</a>
-<a onclick="showSection('trainer')">Təlimçi haqqında</a>
-<a onclick="showSection('training')">Təlim</a>
-<a onclick="showSection('exam')">İmtahan</a>
-<a onclick="showSection('certificate')">Sertifikat</a>
+<button onclick="showSection('about')">Təlim haqqında</button>
+<button onclick="showSection('trainer')">Təlimçi haqqında</button>
+<button onclick="showSection('training')">Təlim</button>
+<button onclick="showSection('exam')">İmtahan</button>
+<button onclick="showSection('certificate')">Sertifikat</button>
 </div>
 
 <img class="logo" src="logo.jpg">
@@ -202,14 +206,10 @@ border-radius:8px;
 
 <!-- CONTENT -->
 <div id="content" class="content">
-
 <div class="card">
 <h2>Xoş gəlmisiniz</h2>
-<p>
-ISO 9001:2015 interaktiv təlim portalına xoş gəlmisiniz.
-</p>
+<p>ISO 9001:2015 interaktiv təlim portalına xoş gəlmisiniz.</p>
 </div>
-
 </div>
 
 </div>
@@ -227,32 +227,27 @@ let sections = {
 about: `
 <div class="card">
 <h2>Təlim haqqında</h2>
-<p>
-Bu təlim ISO 9001:2015 standartının tətbiqini öyrədir.
-</p>
+<p>Bu təlim ISO 9001:2015 standartının nəzəri və praktiki tətbiqinə yönəlmişdir.</p>
 </div>
 `,
 
 trainer: `
 <div class="card">
 <h2>Təlimçi haqqında</h2>
-<p>
-ISO auditoru, məsləhətçi və təlimçi.
-</p>
+<p>ISO beynəlxalq standartları üzrə auditor, məsləhətçi və təlimçi.</p>
 </div>
 `,
 
 training: `
 <div class="card">
-<h2>Təlim modulları</h2>
-<p>Sol paneldən maddələri seçin.</p>
+<h2>Təlim Modulları</h2>
+<p>Sol paneldən maddələri seçərək təlimə başlaya bilərsiniz.</p>
 </div>
 `,
 
 exam: `
 <div class="card">
 <h2>İmtahan</h2>
-
 <p>Sual: Risk əsaslı düşüncə hansı maddədədir?</p>
 
 <div class="quiz-option" onclick="checkAnswer(this,false)">4-cü maddə</div>
@@ -269,7 +264,7 @@ certificate: `
 <input id="name" placeholder="Ad">
 <input id="surname" placeholder="Soyad">
 
-<button onclick="generateCertificate()">
+<button class="main-btn" onclick="generateCertificate()">
 Sertifikat yarat
 </button>
 
@@ -279,67 +274,22 @@ Sertifikat yarat
 };
 
 document.getElementById("content").innerHTML = sections[section];
-
 }
 
 /* CLAUSES */
 function loadClause(clause){
 
 let clauses = {
-
-4: `
-<div class="card">
-<h2>4. Kontekst</h2>
-<p>Təşkilat daxili və xarici məsələləri müəyyən etməlidir.</p>
-</div>
-`,
-
-5: `
-<div class="card">
-<h2>5. Liderlik</h2>
-<p>Top management öhdəlik götürməlidir.</p>
-</div>
-`,
-
-6: `
-<div class="card">
-<h2>6. Planlaşdırma</h2>
-<p>Risk və imkanlar müəyyən olunmalıdır.</p>
-</div>
-`,
-
-7: `
-<div class="card">
-<h2>7. Dəstək</h2>
-<p>Kompetensiya və resurslar.</p>
-</div>
-`,
-
-8: `
-<div class="card">
-<h2>8. Əməliyyat</h2>
-<p>Əsas proseslərin idarə olunması.</p>
-</div>
-`,
-
-9: `
-<div class="card">
-<h2>9. Qiymətləndirmə</h2>
-<p>Audit və KPI.</p>
-</div>
-`,
-
-10: `
-<div class="card">
-<h2>10. Təkmilləşdirmə</h2>
-<p>Davamlı inkişaf.</p>
-</div>
-`
-
+4:`<div class="card"><h2>4. Kontekst</h2><p>Təşkilat daxili və xarici məsələləri müəyyən etməlidir.</p></div>`,
+5:`<div class="card"><h2>5. Liderlik</h2><p>Top management öhdəlik götürməlidir.</p></div>`,
+6:`<div class="card"><h2>6. Planlaşdırma</h2><p>Risk və imkanlar müəyyən olunmalıdır.</p></div>`,
+7:`<div class="card"><h2>7. Dəstək</h2><p>Kompetensiya və resurslar.</p></div>`,
+8:`<div class="card"><h2>8. Əməliyyat</h2><p>Əsas proseslərin idarə olunması.</p></div>`,
+9:`<div class="card"><h2>9. Qiymətləndirmə</h2><p>Audit və KPI.</p></div>`,
+10:`<div class="card"><h2>10. Təkmilləşdirmə</h2><p>Davamlı inkişaf.</p></div>`
 };
 
 document.getElementById("content").innerHTML = clauses[clause];
-
 }
 
 /* QUIZ */
@@ -353,51 +303,47 @@ alert("Yanlış cavab");
 }
 }
 
-/* CERTIFICATE PDF */
-async function generateCertificate(){
+/* CERTIFICATE GENERATOR */
+async function generateCertificate() {
 
 const { jsPDF } = window.jspdf;
 
 let name = document.getElementById("name").value.trim();
 let surname = document.getElementById("surname").value.trim();
 
-if(!name || !surname){
-alert("Ad və soyad daxil edin");
+if (!name || !surname) {
+alert("Ad və Soyad daxil edin");
 return;
 }
 
 let participantName = name + " " + surname;
 
-const doc = new jsPDF("landscape");
+const doc = new jsPDF("landscape", "mm", "a4");
 
-doc.setLineWidth(2);
-doc.rect(10,10,277,190);
+const img = new Image();
+img.src = "certificate-template.png";
 
-doc.setFont("helvetica","bold");
-doc.setFontSize(28);
-doc.text("SERTİFİKAT",148,40,{align:"center"});
+img.onload = function () {
 
-doc.setFontSize(16);
-doc.setFont("helvetica","normal");
-doc.text("Bu sertifikat təqdim olunur:",148,65,{align:"center"});
+doc.addImage(img, "PNG", 0, 0, 297, 210);
 
-doc.setFontSize(24);
-doc.setFont("helvetica","bold");
-doc.text(participantName,148,90,{align:"center"});
+/* AD SOYAD */
+doc.setFont("times", "bold");
+doc.setFontSize(20);
+doc.text(participantName, 148, 102, { align: "center" });
 
-doc.setFontSize(16);
-doc.setFont("helvetica","normal");
-doc.text(
-"ISO 9001:2015 Keyfiyyət İdarəetmə Sistemi təlimini uğurla tamamladığı üçün",
-148,110,{align:"center"}
-);
-
+/* TARIX */
 const today = new Date().toLocaleDateString();
+doc.setFontSize(12);
+doc.text(today, 25, 145);
 
-doc.text("Tarix: " + today,40,170);
-doc.text("Təlimçi: ____________________",190,170);
+/* SERTİFİKAT ID */
+let certId = "MID-" + Date.now();
+doc.text(certId, 25, 153);
 
-doc.save(participantName + "-Sertifikat.pdf");
+doc.save(participantName + "-Certificate.pdf");
+
+};
 
 }
 
