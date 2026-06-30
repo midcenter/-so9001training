@@ -325,22 +325,24 @@ img.src = "certificate-template.png";
 
 img.onload = function () {
 
+/* Full template background */
 doc.addImage(img, "PNG", 0, 0, 297, 210);
 
-/* AD SOYAD */
+/* ONLY NAME */
 doc.setFont("times", "bold");
 doc.setFontSize(20);
-doc.text(participantName, 148, 102, { align: "center" });
+doc.text(participantName, 148, 100, { align: "center" });
 
-/* TARIX */
+/* DATE */
 const today = new Date().toLocaleDateString();
-doc.setFontSize(12);
-doc.text(today, 25, 145);
+doc.setFontSize(11);
+doc.text(today, 28, 145);
 
-/* SERTİFİKAT ID */
+/* CERTIFICATE ID */
 let certId = "MID-" + Date.now();
-doc.text(certId, 25, 153);
+doc.text(certId, 28, 153);
 
+/* SAVE */
 doc.save(participantName + "-Certificate.pdf");
 
 };
