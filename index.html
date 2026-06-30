@@ -278,7 +278,7 @@ certificate: `
 <p>
 İmtahanı uğurla tamamladıqdan sonra sertifikat əldə ediləcək.
 </p>
-<button onclick="downloadCertificate()">Sertifikatı yüklə</button>
+<button onclick="generateCertificate()">Sertifikatı yüklə</button>
 </div>
 `
 
@@ -367,7 +367,53 @@ alert("Yanlış cavab");
 function downloadCertificate(){
 alert("Sertifikat yükləmə modulu sonradan əlavə olunacaq.");
 }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+<script>
+async function generateCertificate(){
+
+const { jsPDF } = window.jspdf;
+const doc = new jsPDF("landscape");
+
+/* FRAME */
+doc.setLineWidth(2);
+doc.rect(10,10,277,190);
+
+/* TITLE */
+doc.setFont("helvetica","bold");
+doc.setFontSize(28);
+doc.text("SERTİFİKAT", 148, 40, {align:"center"});
+
+/* SUBTITLE */
+doc.setFontSize(16);
+doc.setFont("helvetica","normal");
+doc.text("Bu sertifikat təqdim olunur:", 148, 65, {align:"center"});
+
+/* NAME */
+let participantName = prompt("İştirakçının adını daxil edin:");
+if(!participantName) participantName = "İştirakçı";
+
+doc.setFontSize(24);
+doc.setFont("helvetica","bold");
+doc.text(participantName, 148, 90, {align:"center"});
+
+/* TRAINING */
+doc.setFontSize(16);
+doc.setFont("helvetica","normal");
+doc.text("ISO 9001:2015 Keyfiyyət İdarəetmə Sistemi təlimini uğurla tamamladığı üçün", 148, 110, {align:"center"});
+
+/* DATE */
+const today = new Date().toLocaleDateString();
+doc.text("Tarix: " + today, 40, 170);
+
+/* TRAINER */
+doc.text("Təlimçi: ____________________", 190, 170);
+
+/* SAVE */
+doc.save("ISO9001-Sertifikat.pdf");
+
+}
+</script>
 </script>
 
 </body>
