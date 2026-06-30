@@ -58,7 +58,20 @@ font-size:15px;
 .sidebar button:hover{
 background:#1e293b;
 }
+.submenu{
+display:none;
+padding-left:20px;
+background:#1e293b;
+}
 
+.submenu li{
+border:none;
+}
+
+.submenu button{
+font-size:14px;
+padding:10px 0;
+}
 /* MAIN */
 .main{
 flex:1;
@@ -171,19 +184,29 @@ border-radius:8px;
 <div class="sidebar">
 <h2>ISO 9001:2015</h2>
 
+<div class="sidebar">
+<h2>ISO 9001:2015</h2>
+
 <ul>
-<li><button onclick="loadTopic('intro')">1. Giriş</button></li>
-<li><button onclick="loadTopic('concepts')">2. Əsas anlayışlar</button></li>
-<li><button onclick="loadTopic('clause4')">3. Maddə 4 — Kontekst</button></li>
-<li><button onclick="loadTopic('clause5')">4. Maddə 5 — Liderlik</button></li>
-<li><button onclick="loadTopic('clause6')">5. Maddə 6 — Planlaşdırma</button></li>
-<li><button onclick="loadTopic('clause7')">6. Maddə 7 — Dəstək</button></li>
-<li><button onclick="loadTopic('clause8')">7. Maddə 8 — Əməliyyat</button></li>
-<li><button onclick="loadTopic('clause9')">8. Maddə 9 — Qiymətləndirmə</button></li>
-<li><button onclick="loadTopic('clause10')">9. Maddə 10 — Təkmilləşdirmə</button></li>
-<li><button onclick="loadTopic('practical')">10. Praktiki hissə</button></li>
-<li><button onclick="showSection('exam')">11. Quiz / İmtahan</button></li>
-<li><button onclick="showSection('certificate')">12. Sertifikat</button></li>
+
+<li>
+<button onclick="toggleSubmenu('clause4')">
+4. Kontekst
+</button>
+
+<ul id="clause4" class="submenu">
+
+<li><button onclick="loadClause4('4.1')">4.1 Daxili/Xarici məsələlər</button></li>
+
+<li><button onclick="loadClause4('4.2')">4.2 Maraqlı tərəflər</button></li>
+
+<li><button onclick="loadClause4('4.3')">4.3 Əhatə dairəsi</button></li>
+
+<li><button onclick="loadClause4('4.4')">4.4 Proses yanaşması</button></li>
+
+</ul>
+</li>
+
 </ul>
 </div>
 
@@ -296,6 +319,15 @@ let clauses = {
 };
 
 document.getElementById("content").innerHTML = clauses[clause];
+}
+    function toggleSubmenu(id){
+let menu = document.getElementById(id);
+
+if(menu.style.display === "block"){
+menu.style.display = "none";
+}else{
+menu.style.display = "block";
+}
 }
 
 /* QUIZ */
