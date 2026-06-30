@@ -87,12 +87,6 @@ transition:.3s;
 color:#2563eb;
 }
 
-.topnav-right{
-display:flex;
-justify-content:flex-end;
-align-items:center;
-}
-
 .logo{
 width:160px;
 }
@@ -127,7 +121,6 @@ box-shadow:0 3px 12px rgba(0,0,0,0.08);
 
 .card h2{
 margin-bottom:15px;
-color:#0f172a;
 }
 
 button{
@@ -137,6 +130,7 @@ color:white;
 border:none;
 border-radius:8px;
 cursor:pointer;
+margin-top:10px;
 }
 
 button:hover{
@@ -155,13 +149,21 @@ border-radius:8px;
 .quiz-option:hover{
 background:#dbeafe;
 }
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ddd;
+border-radius:8px;
+}
 </style>
 </head>
 <body>
 
 <div class="container">
 
-<!-- SOL SIDEBAR -->
+<!-- SIDEBAR -->
 <div class="sidebar">
 <h2>ISO 9001:2015</h2>
 <ul>
@@ -180,7 +182,6 @@ background:#dbeafe;
 
 <!-- TOPBAR -->
 <div class="topbar">
-
 <div class="topnav-left">
 <a onclick="showSection('about')">Təlim haqqında</a>
 <a onclick="showSection('trainer')">Təlimçi haqqında</a>
@@ -189,10 +190,7 @@ background:#dbeafe;
 <a onclick="showSection('certificate')">Sertifikat</a>
 </div>
 
-<div class="topnav-right">
 <img class="logo" src="logo.jpg">
-</div>
-
 </div>
 
 <!-- VIDEO -->
@@ -209,7 +207,6 @@ background:#dbeafe;
 <h2>Xoş gəlmisiniz</h2>
 <p>
 ISO 9001:2015 interaktiv təlim portalına xoş gəlmisiniz.
-Yuxarı menyudan bölmə seçin və ya soldan standart maddələrini açın.
 </p>
 </div>
 
@@ -217,6 +214,8 @@ Yuxarı menyudan bölmə seçin və ya soldan standart maddələrini açın.
 
 </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 
@@ -229,8 +228,7 @@ about: `
 <div class="card">
 <h2>Təlim haqqında</h2>
 <p>
-Bu təlim ISO 9001:2015 standartının nəzəri və praktiki tətbiqinə yönəlmişdir.
-İştirakçılar proses yanaşması, risk əsaslı düşüncə və audit prinsiplərini öyrənəcəklər.
+Bu təlim ISO 9001:2015 standartının tətbiqini öyrədir.
 </p>
 </div>
 `,
@@ -239,14 +237,7 @@ trainer: `
 <div class="card">
 <h2>Təlimçi haqqında</h2>
 <p>
-ISO beynəlxalq standartları üzrə auditor, məsləhətçi və təlimçi.
-Əsas istiqamətlər:
-<ul>
-<li>İdarəetmə sistemləri</li>
-<li>Audit</li>
-<li>Sertifikasiya hazırlığı</li>
-<li>Risk idarəetməsi</li>
-</ul>
+ISO auditoru, məsləhətçi və təlimçi.
 </p>
 </div>
 `,
@@ -254,16 +245,15 @@ ISO beynəlxalq standartları üzrə auditor, məsləhətçi və təlimçi.
 training: `
 <div class="card">
 <h2>Təlim modulları</h2>
-<p>
-Sol paneldən maddələri seçərək təlimə başlaya bilərsiniz.
-</p>
+<p>Sol paneldən maddələri seçin.</p>
 </div>
 `,
 
 exam: `
 <div class="card">
 <h2>İmtahan</h2>
-<p>Sual: Risk əsaslı düşüncə ISO 9001-də hansı maddədə qeyd olunur?</p>
+
+<p>Sual: Risk əsaslı düşüncə hansı maddədədir?</p>
 
 <div class="quiz-option" onclick="checkAnswer(this,false)">4-cü maddə</div>
 <div class="quiz-option" onclick="checkAnswer(this,true)">6-cı maddə</div>
@@ -274,14 +264,6 @@ exam: `
 
 certificate: `
 <div class="card">
-<h2>Sertifikat</h2>
-<p>
-İmtahanı uğurla tamamladıqdan sonra sertifikat əldə ediləcək.
-</p>
-<button onclick="generateCertificate()">Sertifikatı yüklə</button>
-</div>
-`
-<div class="card">
 <h2>Sertifikat Generator</h2>
 
 <input id="name" placeholder="Ad">
@@ -290,7 +272,10 @@ certificate: `
 <button onclick="generateCertificate()">
 Sertifikat yarat
 </button>
+
 </div>
+`
+
 };
 
 document.getElementById("content").innerHTML = sections[section];
@@ -304,54 +289,50 @@ let clauses = {
 
 4: `
 <div class="card">
-<h2>4. Təşkilatın Konteksti</h2>
-<p><b>Tələb:</b> Təşkilat daxili və xarici məsələləri müəyyən etməlidir.</p>
-<p><b>Praktiki:</b> SWOT, maraqlı tərəflərin analizi.</p>
-<p><b>Case:</b> İT şirkət bazar risklərini qiymətləndirir.</p>
+<h2>4. Kontekst</h2>
+<p>Təşkilat daxili və xarici məsələləri müəyyən etməlidir.</p>
 </div>
 `,
 
 5: `
 <div class="card">
 <h2>5. Liderlik</h2>
-<p><b>Tələb:</b> Top management öhdəlik götürməlidir.</p>
-<p><b>Case:</b> CEO Keyfiyyət məqsədlərini təsdiqləyir.</p>
+<p>Top management öhdəlik götürməlidir.</p>
 </div>
 `,
 
 6: `
 <div class="card">
 <h2>6. Planlaşdırma</h2>
-<p><b>Tələb:</b> Risk və imkanlar müəyyən olunmalıdır.</p>
-<p><b>Case:</b> Təchizat risk matrisi hazırlanır.</p>
+<p>Risk və imkanlar müəyyən olunmalıdır.</p>
 </div>
 `,
 
 7: `
 <div class="card">
 <h2>7. Dəstək</h2>
-<p>Kompetensiya, resurslar, sənədləşmə və məlumatlılıq.</p>
+<p>Kompetensiya və resurslar.</p>
 </div>
 `,
 
 8: `
 <div class="card">
 <h2>8. Əməliyyat</h2>
-<p>Əsas proseslərin idarə olunması və xidmətlərin icrası.</p>
+<p>Əsas proseslərin idarə olunması.</p>
 </div>
 `,
 
 9: `
 <div class="card">
-<h2>9. Performans Qiymətləndirmə</h2>
-<p>Audit, monitorinq, KPI və management review.</p>
+<h2>9. Qiymətləndirmə</h2>
+<p>Audit və KPI.</p>
 </div>
 `,
 
 10: `
 <div class="card">
 <h2>10. Təkmilləşdirmə</h2>
-<p>Corrective Action və Continual Improvement.</p>
+<p>Davamlı inkişaf.</p>
 </div>
 `
 
@@ -372,57 +353,54 @@ alert("Yanlış cavab");
 }
 }
 
-/* CERTIFICATE */
-function downloadCertificate(){
-alert("Sertifikat yükləmə modulu sonradan əlavə olunacaq.");
-}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<script>
+/* CERTIFICATE PDF */
 async function generateCertificate(){
 
 const { jsPDF } = window.jspdf;
+
+let name = document.getElementById("name").value.trim();
+let surname = document.getElementById("surname").value.trim();
+
+if(!name || !surname){
+alert("Ad və soyad daxil edin");
+return;
+}
+
+let participantName = name + " " + surname;
+
 const doc = new jsPDF("landscape");
 
-/* FRAME */
 doc.setLineWidth(2);
 doc.rect(10,10,277,190);
 
-/* TITLE */
 doc.setFont("helvetica","bold");
 doc.setFontSize(28);
-doc.text("SERTİFİKAT", 148, 40, {align:"center"});
+doc.text("SERTİFİKAT",148,40,{align:"center"});
 
-/* SUBTITLE */
 doc.setFontSize(16);
 doc.setFont("helvetica","normal");
-doc.text("Bu sertifikat təqdim olunur:", 148, 65, {align:"center"});
-
-/* NAME */
-let participantName = prompt("İştirakçının adını daxil edin:");
-if(!participantName) participantName = "İştirakçı";
+doc.text("Bu sertifikat təqdim olunur:",148,65,{align:"center"});
 
 doc.setFontSize(24);
 doc.setFont("helvetica","bold");
-doc.text(participantName, 148, 90, {align:"center"});
+doc.text(participantName,148,90,{align:"center"});
 
-/* TRAINING */
 doc.setFontSize(16);
 doc.setFont("helvetica","normal");
-doc.text("ISO 9001:2015 Keyfiyyət İdarəetmə Sistemi təlimini uğurla tamamladığı üçün", 148, 110, {align:"center"});
+doc.text(
+"ISO 9001:2015 Keyfiyyət İdarəetmə Sistemi təlimini uğurla tamamladığı üçün",
+148,110,{align:"center"}
+);
 
-/* DATE */
 const today = new Date().toLocaleDateString();
-doc.text("Tarix: " + today, 40, 170);
 
-/* TRAINER */
-doc.text("Təlimçi: ____________________", 190, 170);
+doc.text("Tarix: " + today,40,170);
+doc.text("Təlimçi: ____________________",190,170);
 
-/* SAVE */
-doc.save("ISO9001-Sertifikat.pdf");
+doc.save(participantName + "-Sertifikat.pdf");
 
 }
-</script>
+
 </script>
 
 </body>
