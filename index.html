@@ -312,43 +312,69 @@ let name = document.getElementById("name").value.trim();
 let surname = document.getElementById("surname").value.trim();
 
 if (!name || !surname) {
-alert("Ad və Soyad daxil edin");
-return;
+    alert("Ad və Soyad daxil edin");
+    return;
 }
 
 let participantName = name + " " + surname;
 
-const doc = new jsPDF("landscape", "mm", "a4");
+const doc = new jsPDF({
+    orientation: "landscape",
+    unit: "mm",
+    format: "a4"
+});
 
 const img = new Image();
 img.src = "certificate-template.png";
 
 img.onload = function () {
 
-/* Full template background */
-doc.addImage(img, "PNG", 0, 0, 297, 210);
+    const pageWidth = 297;
+    const pageHeight = 210;
 
-/* ONLY NAME */
-doc.setFont("times", "bold");
-doc.setFontSize(20);
-doc.text(participantName, 148, 100, { align: "center" });
+    const imgWidth = img.width;
+    const imgHeight = img.height;
 
-/* DATE */
-const today = new Date().toLocaleDateString();
-doc.setFontSize(11);
-doc.text(today, 28, 145);
+    /* Aspect ratio qorunur */
+    const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
 
-/* CERTIFICATE ID */
-let certId = "MID-" + Date.now();
-doc.text(certId, 28, 153);
+    const renderWidth = imgWidth * ratio;
+    const renderHeight = imgHeight * ratio;
 
-/* SAVE */
-doc.save(participantName + "-Certificate.pdf");
+    /* Ortalama */
+    const x = (pageWidth - renderWidth) / 2;
+    const y = (pageHeight - renderHeight) / 2;
 
+    /* Şablon EXACT olduğu kimi */
+    doc.addImage(
+        img,
+        "PNG",
+        x,
+        y,
+        renderWidth,
+        renderHeight
+    );
+
+    /* Ad Soyad (sənin template xəttinə uyğun) */
+    doc.setFont("times", "bold");
+    doc.setFontSize(20);
+    doc.text(participantName, 148, 102, {
+        align: "center"
+    });
+
+    /* Tarix */
+    const today = new Date().toLocaleDateString();
+    doc.setFontSize(12);
+    doc.text(today, 35, 145);
+
+    /* Sertifikat ID */
+    let certId = "MID-" + Date.now();
+    doc.text(certId, 35, 153);
+
+    doc.save(participantName + "-Certificate.pdf");
 };
 
 }
-
 </script>
 
 </body>
