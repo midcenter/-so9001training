@@ -306,21 +306,9 @@ document.getElementById("content").innerHTML = sections[section];
 }
 
 /* CLAUSES */
-function loadClause(clause){
+/* SUBMENU OPEN/CLOSE */
+function toggleSubmenu(id){
 
-let clauses = {
-4:`<div class="card"><h2>4. Kontekst</h2><p>Təşkilat daxili və xarici məsələləri müəyyən etməlidir.</p></div>`,
-5:`<div class="card"><h2>5. Liderlik</h2><p>Top management öhdəlik götürməlidir.</p></div>`,
-6:`<div class="card"><h2>6. Planlaşdırma</h2><p>Risk və imkanlar müəyyən olunmalıdır.</p></div>`,
-7:`<div class="card"><h2>7. Dəstək</h2><p>Kompetensiya və resurslar.</p></div>`,
-8:`<div class="card"><h2>8. Əməliyyat</h2><p>Əsas proseslərin idarə olunması.</p></div>`,
-9:`<div class="card"><h2>9. Qiymətləndirmə</h2><p>Audit və KPI.</p></div>`,
-10:`<div class="card"><h2>10. Təkmilləşdirmə</h2><p>Davamlı inkişaf.</p></div>`
-};
-
-document.getElementById("content").innerHTML = clauses[clause];
-}
-    function toggleSubmenu(id){
 let menu = document.getElementById(id);
 
 if(menu.style.display === "block"){
@@ -328,8 +316,148 @@ menu.style.display = "none";
 }else{
 menu.style.display = "block";
 }
+
 }
 
+/* CLAUSE 4 CONTENT ENGINE */
+function loadClause4(subclause){
+
+let content = {
+
+"4.1": `
+<div class="card">
+
+<h2>4.1 Təşkilatın və onun kontekstinin anlaşılması</h2>
+
+<h3>Standart tələbi:</h3>
+<p>
+Təşkilat öz məqsədlərinə və strateji istiqamətinə təsir edə biləcək daxili və xarici məsələləri müəyyən etməlidir.
+</p>
+
+<h3>Nəzəri izah:</h3>
+<p>
+Bu maddə təşkilatın fəaliyyət mühitini anlamaq üçündür.
+Buraya bazar vəziyyəti, qanunvericilik, texnologiya, rəqabət, daxili resurslar daxildir.
+</p>
+
+<h3>Universitet üzrə praktiki nümunə:</h3>
+<p>
+Universitetdə tələbə sayının azalması xarici məsələdir.<br>
+Akademik heyətin təcrübə səviyyəsi daxili məsələdir.<br>
+Təhsil Nazirliyinin yeni tələbləri xarici kontekstdir.
+</p>
+
+<h3>Praktiki sənəd:</h3>
+<p>
+SWOT Analizi sənədi<br>
+PESTLE Analizi<br>
+Kontekst Analizi Cədvəli
+</p>
+
+</div>
+`,
+
+"4.2": `
+<div class="card">
+
+<h2>4.2 Maraqlı tərəflərin ehtiyacları</h2>
+
+<h3>Standart tələbi:</h3>
+<p>
+Təşkilat QMS ilə əlaqəli maraqlı tərəfləri və onların tələblərini müəyyən etməlidir.
+</p>
+
+<h3>Nəzəri izah:</h3>
+<p>
+Müştərilər, tələbələr, müəllimlər, dövlət orqanları və akkreditasiya qurumları maraqlı tərəf hesab olunur.
+</p>
+
+<h3>Universitet nümunəsi:</h3>
+<p>
+Tələbə → keyfiyyətli təhsil istəyir.<br>
+Valideyn → təhlükəsiz mühit istəyir.<br>
+Nazirlik → qanunvericiliyə uyğunluq tələb edir.
+</p>
+
+<h3>Praktiki sənəd:</h3>
+<p>
+Interested Parties Register<br>
+Stakeholder Matrix<br>
+Requirement Analysis Table
+</p>
+
+</div>
+`,
+
+"4.3": `
+<div class="card">
+
+<h2>4.3 QMS əhatə dairəsi</h2>
+
+<h3>Standart tələbi:</h3>
+<p>
+Təşkilat QMS-in tətbiq sahəsini müəyyən etməlidir.
+</p>
+
+<h3>Nəzəri izah:</h3>
+<p>
+Scope hansı proseslərin sistemə daxil olduğunu göstərir.
+</p>
+
+<h3>Universitet nümunəsi:</h3>
+<p>
+Ali təhsil xidmətlərinin göstərilməsi<br>
+Tələbə qeydiyyatı<br>
+İmtahan idarəetməsi
+</p>
+
+<h3>Praktiki sənəd:</h3>
+<p>
+Scope Statement<br>
+QMS Boundary Document
+</p>
+
+</div>
+`,
+
+"4.4": `
+<div class="card">
+
+<h2>4.4 Proses yanaşması</h2>
+
+<h3>Standart tələbi:</h3>
+<p>
+Təşkilat QMS üçün lazım olan prosesləri müəyyən etməli və onların qarşılıqlı əlaqəsini idarə etməlidir.
+</p>
+
+<h3>Nəzəri izah:</h3>
+<p>
+Input → Process → Output modeli.
+Proses owner, KPI, risk və controls burada müəyyən olunur.
+</p>
+
+<h3>Universitet nümunəsi:</h3>
+<p>
+Qəbul → qeydiyyat → dərs planı → tədris → imtahan → diplom
+</p>
+
+<h3>Praktiki sənəd:</h3>
+<p>
+Process Map<br>
+Process Card<br>
+Process Register<br>
+SIPOC
+</p>
+
+</div>
+`
+
+};
+
+document.getElementById("content").innerHTML = content[subclause];
+document.getElementById("content").scrollTop = 0;
+
+}
 /* QUIZ */
 function checkAnswer(element, correct){
 if(correct){
